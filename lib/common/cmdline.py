@@ -25,8 +25,9 @@ class CommandLines():
         parse.add_option('--pd', '--postdata', dest='postdata', type=str, help='HTTP Request PostData (When Scanning)')
         parse.add_option('--ah', '--apihost', dest='apihost', type=str, help='ApiHost like: https://pocsir.com:777/')
         parse.add_option('--fe', '--fileext', dest='filenameextension', type=str, help='Api Filename Extension such as: .json')
+        parse.add_option('--fp', '--file', dest='file',type=str, help="Please Enter the File Path like /tmp/urlLists.txt")
         (options, args) = parse.parse_args()
-        if options.url == None:
+        if options.url == None and options.file == None:
             parse.print_help()
             sys.exit(0)
         return options
