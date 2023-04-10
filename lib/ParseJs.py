@@ -1,7 +1,7 @@
 # !/usr/bin/env python3
 # -*- encoding: utf-8 -*-
 
-import re,requests,warnings,sqlite3,os
+import re,requests,warnings,sqlite3,os,time
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 from lib.common.utils import Utils
@@ -42,10 +42,10 @@ class ParseJs():  # 获取js进行提取
         self.log.info(Utils().tellTime() + Utils().getMyWord("{pares_js}"))
         sslFlag = int(self.options.ssl_flag)
         if sslFlag == 1:
-            demo = requests.get(url=url, headers=headers, proxies=self.proxy_data,verify=False).text
+            demo = requests.get(url=url, headers=headers, proxies=self.proxy_data,verify=False,timeout=5).text
         else:
-            demo = requests.get(url=url, headers=headers,proxies=self.proxy_data).text
-        demo = demo.replace("<!--", "").replace("-->", "")  # 删去html注释
+            demo = requests.get(url=url, headers=headers,proxies=self.proxy_data,verify=False,timeout=5).text
+        #demo = demo.replace("<!--", "").replace("-->", "")  # 删去html注释
         soup = BeautifulSoup(demo, "html.parser")
         for item in soup.find_all("script"):
             jsPath = item.get("src")
