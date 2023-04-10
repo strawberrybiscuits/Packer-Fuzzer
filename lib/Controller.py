@@ -28,7 +28,7 @@ class Project():
         self.options = options
 
     def parseStart(self):
-        projectTag = logs
+        projectTag = Utils().creatTag(6)
         if self.options.silent != None:
             print("[TAG]" + projectTag)
         DatabaseType(projectTag).createDatabase()
